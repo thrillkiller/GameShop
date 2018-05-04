@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+  gameDB-dock:
+    image: mysql:latest
+    environment:
+    - MYSQL_ROOT_PASSWORD=rootpassword
+    - MYSQL_DATABASE=gameDB
+    - MYSQL_USER=user
+    - MYSQL_PASSWORD=password
+    volumes :
+      - /data/mysql
+  spring:
+    image: spring-boot-jpa-image
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - gameDB-dock
+    ports:
+      - 8097:8090
+    volumes:
+      - /data/spring-boot-app
+ 
