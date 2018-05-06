@@ -22,7 +22,8 @@ public class Product {
     private int available;
 
     @ManyToOne
-    private Order order;
+    @JoinColumn(name = "eorder_id")
+    private EOrder EOrder;
 
     public long getId() {
         return id;
@@ -100,11 +101,11 @@ public class Product {
         return (float)available * basePrice;
     }
 
-    public Order getOrder() {
-        return order;
+    public EOrder getEOrder() {
+        return EOrder;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setEOrder(EOrder EOrder) {
+        this.EOrder = EOrder;
     }
 }

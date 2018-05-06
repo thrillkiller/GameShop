@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
-public class Order {
+public class EOrder { //EntityOrder
 
     public enum State{
       pending,processed,sent ;
@@ -15,16 +15,17 @@ public class Order {
     @Id
     private long id;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     private Set<Product> cart;
 
     @Column
-    private LocalDateTime dateTime;
+    private LocalDateTime orderTime;
 
     @Column
     private State state;
 
-    @Column String adress;
+    @Column
+    private String adress;
 
 
     public long getId() {
@@ -43,12 +44,12 @@ public class Order {
         this.cart = cart;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public LocalDateTime getOrderTime() {
+        return orderTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setOrderTime(LocalDateTime orderTime) {
+        this.orderTime = orderTime;
     }
 
     public State getState() {

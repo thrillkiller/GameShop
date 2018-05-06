@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Game shop</title>
+    </head>
+	<body bgcolor="#acac8f">
+	<center>
+	<div th:if=" ${error} == false">
+		<p>Name: <span th:text="${name}">Name</span></p>
+		<p>Description : <span th:text="${description}">desc</span></p>
+		<p>Price : <span th:text="${price}">price</span></p>
+		<p>On stock : <span th:text="${onStock}">onStock</span></p>
+		<p>Publisher : <span th:text="${publisher}">onStock</span></p>
+		<p>Release date : <span th:text="${Release date}">onStock</span></p>
+		<p>Genres : <span th:text="${genres}">onStock</span></p>
+		<div th:if="${onStock} <= 0 and ${logged} == true and ${supervisor} == false">
+			<td><form action="#" th:action="@{/game/add/} + ${id}" method="post">
+			<input type="submit" value="Add to cart"/></form></td>		
+		</div>
+		<div th:if=" ${supervisor} == true">
+			<td><form action="#" th:action="@{/game/restock/} + ${id}" method="post">
+			<input type="submit" value="Retock"/></form></td>		
+		</div>
+		</p>
+	</div>
+	<div th:if=" ${error} == false">
+	<p>Error</p>
+	</p>That game doesn't exist</p>
+	</div>
+	</center>
+    </body>
+</html>

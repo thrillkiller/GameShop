@@ -16,9 +16,19 @@ public class SettingService {
         this.loggedUser = loggedUser;
     }
 
-    public boolean isAnyoneLogged()
+    public boolean isLogged()
     {
         if(loggedUser == null)
+            return false;
+        else
+            return true;
+    }
+
+    public boolean isSupervisor()
+    {
+        if(!isLogged())
+            return false;
+        else if(!loggedUser.isSupervisor())
             return false;
         else
             return true;

@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>Game Shop</title>
+    </head>
+	<body bgcolor="#acac8f">
+	<center>
+	<div th:if="${issupervisor} == true">
+		<p>Users list<p>
+		<table>
+		<tr>
+		<th>No</th>
+		<th>Name</th>
+		<th>Surname</th>
+		</tr>
+		<tr th:each="u,i : ${users}">
+		<td th:text="${i.count}">1</td>
+		<td th:text="${u.name}">name</td>
+		<td th:text="${u.surname}">surname</td>
+		<td><form action="#" th:action="@{/users/del/} + ${u.id}" method="get">
+		<input type="submit" value="Delete"/></form></td>
+		</tr>
+		</table>
+	</div>
+	<div th:if="${issupervisor} == true or ${logged} == false">
+		<p th:if="${error}">User with that login exists try another one</p>
+		<p>Add new person</p>
+		<p><form action="#" th:action="@{/users}" th:object="${user}" method="post">	
+		<p>Name : <input type="text" th:field="*{name}" value="name"></p>
+		<p>Surname : <input type="text" th:field="*{surname}" value="surname"></p>
+		<p>Login : <input type="text" th:field="*{username}" value="username"></p>
+		<p>Password : <input type="password" th:field="*{password}" value="password"></p>
+		<p>Adress : <input type="text" th:field="*{adress}" value="adress"></p>
+		<div th:if="${issupervisor} == true">
+		<p>Is supervisor : <input type="checkbox" name="${supervisor}" th:value="${supervisor}"/></p>
+		</div>	
+		<p><input type="submit" value="Ok"/>
+		<input type ="reset" value="Clear fields"></form></p>
+	</center>
+    </body>
+</html>

@@ -18,7 +18,7 @@ public class User {
     private String surname;
 
     @Column(unique = true)
-    private String login;
+    private String username;
 
     @Column
     private String password;
@@ -32,11 +32,12 @@ public class User {
     @Transient
     private Set<Product> cart;
 
-    @OneToMany
-    private Set<Order> orders;
+    @OneToMany(cascade = {CascadeType.ALL})
+    private Set<EOrder> EOrders;
 
     public User() {
         cart = new HashSet<>();
+        EOrders = new HashSet<>();
         supervisor = false;
     }
 
@@ -64,12 +65,12 @@ public class User {
         this.surname = surname;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -127,12 +128,12 @@ public class User {
     public Set<Product> getCart() {return cart;}
 
 
-    public Set<Order> getOrders() {
-        return orders;
+    public Set<EOrder> getEOrders() {
+        return EOrders;
     }
 
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
+    public void setEOrders(Set<EOrder> EOrders) {
+        this.EOrders = EOrders;
     }
 
 }

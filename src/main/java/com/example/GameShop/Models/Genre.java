@@ -3,7 +3,7 @@ package com.example.GameShop.Models;
 import javax.persistence.*;
 
 @Entity
-public class Platform {
+public class Genre {
 
     @GeneratedValue
     @Id
@@ -13,7 +13,13 @@ public class Platform {
     public String name;
 
     @ManyToOne
+    @JoinColumn(name = "game_id")
     public Game game;
+
+    public Genre(String name)
+    {
+        this.name = name;
+    }
 
     public long getId() {
         return id;
