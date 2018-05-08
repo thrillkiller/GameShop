@@ -23,7 +23,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
     auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery("select username,password, 'true' as enabled from user where  username=?").
-            authoritiesByUsernameQuery("select username,'any' as role from user where supervisor = true and username=?").
+            authoritiesByUsernameQuery("select username,supervisor as role from user where username=?").
             passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
 
@@ -34,7 +34,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     http.authorizeRequests().antMatchers("/addNew","/orders","/settings").hasAnyAuthority();
     http.formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password").permitAll()
             .successHandler(succesfullAuthenticationHandler).failureUrl("/login/error");
-    http.logout().logoutUrl("/logout").logoutSuccessUrl("/").and().exceptionHandling().accessDeniedPage("/403");
+    http.logout().logoutUrl("/logout").logoutSuccessUrl("/login").and().exceptionHandling().accessDeniedPage("/403");
     http.csrf().disable();
     }
 

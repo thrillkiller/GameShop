@@ -9,7 +9,7 @@ public class Product {
     @Id
     private long id;
 
-    @Column
+    @Column(unique = true)
     private String name;
 
     @Column

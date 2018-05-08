@@ -7,19 +7,21 @@ public class Genre {
 
     @GeneratedValue
     @Id
-    public long id;
+    private long id;
 
     @Column
-    public String name;
+    private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "game_id")
-    public Game game;
+    private Game game;
 
     public Genre(String name)
     {
         this.name = name;
     }
+
+    public Genre() {};
 
     public long getId() {
         return id;

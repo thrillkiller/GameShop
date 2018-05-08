@@ -1,10 +1,10 @@
 package com.example.GameShop.Models;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,10 +14,16 @@ public class Game extends Product {
     private Set<Genre> genres;
 
     @Column
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate releaseDate;
 
     @Column
     private String publisher;
+
+    public Game(){
+        super();
+        genres = new HashSet<>();
+    }
 
     public Set<Genre> getGenres() {
         return genres;
@@ -27,12 +33,12 @@ public class Game extends Product {
         this.genres = genres;
     }
 
-    public LocalDate getRelase() {
+    public LocalDate getReleaseDate() {
         return releaseDate;
     }
 
-    public void setRelase(LocalDate relase) {
-        this.releaseDate = relase;
+    public void setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public String getPublisher() {
@@ -44,6 +50,10 @@ public class Game extends Product {
     }
 
     public boolean hasGenres() {return !genres.isEmpty();}
+
+    public void addGenre(Genre g){
+        genres.add(g);
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -57,4 +67,15 @@ public class Game extends Product {
                 return false;
         }
     }
+
+    public String getGenresString(){
+        String result ="";
+        for(Genre g : genres)
+        {
+            result += g.getName();
+            result += " ";
+        }
+        return result;
+    }
+
 }

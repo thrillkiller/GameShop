@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>Games Shop</title>
+    </head>
+	<body bgcolor="#acac8f">
+	<center>
+	<p>Welcome to Games Shop!</p>		
+	<p>
+	<div th:if="${logged} == true and ${supervisor} == false">
+		<table>
+		<tr>
+		<th>No</th>
+		<th>Name</th>
+		<th>Amount</th>
+		<th>Price</th>
+		</tr>
+		<tr th:each="product,i : ${products}">
+		<td th:text="${i.count}">1</td>
+		<td th:text="${product.name}">name</td>
+		<td th:text="${product.avaible}">1</td>
+		<td th:text="${product.getPrice()}">1</td>
+		<td><form action="#" th:action="@{/cart/reduce/} + ${product.name}" method="get">
+		<input type="submit" value="Substract one"/></form></td>
+		</tr>
+		</table>
+		<p>Sum : <span th:text="${sum}">Sum</span></p>
+		<p><form action="#" th:action="@{/cart/clear}" method="get">
+		<input type="submit" value="Clear cart"/></form></p>
+		<p><form action="#" th:action="@{/order/new}" method="get">
+		<input type="submit" value="Proceed with order"/></form></p>
+	</div>
+
+	<div th:if="${supervisor} == true">
+		<p>Error</p>
+	</div>
+	<p><form action="/">
+	<input type="submit" value="Return to main page"/></form><p>
+	</p>
+	</center>
+    </body>
+</html>

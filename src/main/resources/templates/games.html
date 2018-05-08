@@ -12,8 +12,8 @@
 	</tr>
 	<tr th:each="gam,i : ${games}">
 	<td th:text="${i.count}">1</td>
-	<td><form action="#" th:action="@{/game/} + ${gam.id}" method="post">
-	<input type="submit" value="@{gam.name}"/></form></td>
+	<td><form action="#" th:action="@{/game/} + ${gam.id}" method="get">
+	<input type="submit" th:value="${gam.name}"/></form></td>
 	</tr>
 	</table>
 	<div th:if="${supervisor} == true">
@@ -22,14 +22,14 @@
 		<p><form action="#" th:action="@{/games}" th:object="${game}" method="post">	
 		<p>Name : <input type="text" th:field="*{name}" value="name"></p>
 		<p>Description : <input type="text" th:field="*{description}" value="description"></p>
-		<p>Base : <input type="number" th:field="*{basePrice}" value="basePrice"></p>	
-		<p>Available on stock : <input type="number" th:field="*{available}" value=0></p>
-		<p>Release : <input type="date" th:field="*{release}" ></p>
+		<p>Base : <input type="number" th:field="*{basePrice}" value=0></p>	
+		<p>Available on stock : <input type="number" th:field="*{available}" value=1></p>
+		<p>Release : <input type="date" th:field="*{releaseDate}" ></p>
 		<p>Publisher : <input type="text" th:field="*{publisher}" value="publisher"></p>
-		<p th:each="genre : ${genres}">
-		<input type="checkbox" name="${genre.name}" th:value="${genre.id}"/>
-		<label th:text="${genre.name}"></label>
-		</p>
+		<th:block th:each="genre : ${genres}">
+			<input type="checkbox" name="genresContainer" th:checked="${genre.name}" th:value="${genre.id}"/>
+			<label th:text="${genre.name}"></label>
+		</th:block>
 		<p><input type="submit" value="Ok"/>
 		<input type ="reset" value="Clear fields"></form></p>
 	</div>
