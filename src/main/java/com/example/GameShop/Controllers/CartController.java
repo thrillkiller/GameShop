@@ -27,7 +27,7 @@ public class CartController {
     public String getCart(Model model)
     {   if(settingService.isLogged() && !settingService.isSupervisor())
         {
-        model.addAttribute("products",settingService.getLoggedUser().getCart().toArray());
+        model.addAttribute("products",settingService.getLoggedUser().getCart());
         }
         model.addAttribute("logged",settingService.isLogged());
         model.addAttribute("supervisor",settingService.isSupervisor());
@@ -55,7 +55,7 @@ public class CartController {
                 }
             }
             settingService.getLoggedUser().clearCart();
-            model.addAttribute("products",settingService.getLoggedUser().getCart().toArray());
+            model.addAttribute("products",settingService.getLoggedUser().getCart());
         }
         model.addAttribute("logged",settingService.isLogged());
         model.addAttribute("supervisor",settingService.isSupervisor());

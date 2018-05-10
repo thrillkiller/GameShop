@@ -105,7 +105,7 @@ public class User {
                     exists = true;
                     p.add(1);
             }
-            if(exists)
+            if(!exists)
                 cart.add(product);
     }
 

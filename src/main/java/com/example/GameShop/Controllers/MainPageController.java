@@ -1,8 +1,10 @@
 package com.example.GameShop.Controllers;
 
 import com.example.GameShop.Models.Genre;
+import com.example.GameShop.Models.Product;
 import com.example.GameShop.Models.User;
 import com.example.GameShop.Repositories.GenreRepo;
+import com.example.GameShop.Repositories.ProductRepo;
 import com.example.GameShop.Repositories.UserRepo;
 import com.example.GameShop.Services.SettingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class MainPageController {
     @Autowired
     private SettingService settingService;
 
+    @Autowired
+    private ProductRepo productRepo;
+
     @GetMapping("/")
     public String getMainPage(Model model)
     {
@@ -35,6 +40,15 @@ public class MainPageController {
             user.setSupervisor(true);
             user.setSurname("Admin");
             userRepo.save(user);
+
+            User client = new User();
+            client.setAdress("sdf");
+            client.setSurname("pa");
+            client.setSupervisor(false);
+            client.setName("sa");
+            client.setPassword("pa");
+            client.setUsername("pa");
+            userRepo.save(client);
 
             Genre g1,g2,g3;
             g1 = new Genre("FPS");
