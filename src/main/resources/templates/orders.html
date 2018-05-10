@@ -15,7 +15,7 @@
 	</tr>
 	<tr th:each="eorder,i : ${eorders}">
 	<td th:text="${i.count}">1</td>
-	<td><form action="#" th:action="@{/order/} + ${eorder.id}" method="get">
+	<td><form action="#" th:action="@{/orders/} + ${eorder.id}" method="get">
 	<input type="submit" th:value="${eorder.id}"/></form></td>
 	<td th:text="${eorder.user.getUserName()}">name</td>
 	<td th:text="${eorder.state}">state</td>
@@ -43,10 +43,10 @@
 		</table>
 		<p>Worth: <span th:text="${worth}">1</span></p>
 		<div th:if="${supervisor} and ${nextState} != 'sent'">
-			<p><form action="#" th:action="@{/order/changeTo} + ${nextState}" method="get">
+			<p><form action="#" th:action="@{/orders/changeTo} + ${nextState}" method="get">
 			<input type="submit" th:value="Change to + ${nextState}"/></form></p>
 		<div th:if="${supervisor} == false and ${cancellable}">
-			<p><form action="#" th:action="@{/order/cancel} + ${id}" method="get">
+			<p><form action="#" th:action="@{/orders/cancel} + ${id}" method="get">
 			<input type="submit" th:value="Cancel order"/></form></p>
 	</div>
 	<div th:if="${cancel}">
@@ -57,6 +57,7 @@
 		<p>That order doesn't exists</p>
 	</div>
 	</p>
+
 	</center>
     </body>
 </html>

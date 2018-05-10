@@ -98,18 +98,15 @@ public class User {
     }
 
     public void addProductToCart(Product product) {
-        if(cart.contains(product))
-        {
+        boolean exists = false;
             for(Product p : cart)
             {
                 if(p.getName().equals(product.getName()))
+                    exists = true;
                     p.add(1);
             }
-        }
-        else
-        {
-            cart.add(product);
-        }
+            if(exists)
+                cart.add(product);
     }
 
     public void clearCart(){

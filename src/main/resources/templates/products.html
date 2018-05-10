@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>Games shop</title>
+    </head>
+	<body bgcolor="#acac8f">
+	<center>
+	<p>Games list<p>
+	<table>
+	<tr>
+	<th>No</th>
+	<th>Name</th>
+	</tr>
+	<tr th:each="prod,i : ${products}">
+	<td th:text="${i.count}">1</td>
+	<td><form action="#" th:action="@{/product/} + ${prod.id}" method="get">
+	<input type="submit" th:value="${prod.name}"/></form></td>
+	</tr>
+	</table>
+	<div th:if="${supervisor} == true">
+		<p th:if="${error}">Error has occured/p>
+		<p>Add new game</p>
+		<p><form action="#" th:action="@{/products}" th:object="${product}" method="post">	
+		<p>Name : <input type="text" th:field="*{name}" value="name"></p>
+		<p>Description : <input type="text" th:field="*{description}" value="description"></p>
+		<p>Base : <input type="number" th:field="*{basePrice}" value=0></p>	
+		<p>Available on stock : <input type="number" th:field="*{available}" value=1></p>
+		<p><input type="submit" value="Ok"/>
+		<input type ="reset" value="Clear fields"></form></p>
+	</div>
+	</center>
+    </body>
+</html>
