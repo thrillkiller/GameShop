@@ -23,7 +23,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "eorder_id")
-    private EOrder EOrder;
+    private Eorder Eorder;
 
     public long getId() {
         return id;
@@ -101,11 +101,11 @@ public class Product {
         return (float)available * basePrice;
     }
 
-    public EOrder getEOrder() {
-        return EOrder;
+    public Eorder getEorder() {
+        return Eorder;
     }
 
-    public void setEOrder(EOrder EOrder) {
-        this.EOrder = EOrder;
+    public void setEorder(Eorder eorder) {
+        this.Eorder = eorder;
     }
 }

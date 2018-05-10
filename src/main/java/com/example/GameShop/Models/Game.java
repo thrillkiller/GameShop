@@ -4,14 +4,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 public class Game extends Product {
 
-    @OneToMany(cascade = {CascadeType.ALL})
-    private Set<Genre> genres;
+    @OneToMany(mappedBy = "game",cascade = {CascadeType.ALL}, orphanRemoval = true)
+    private List<Genre> genres;
 
     @Column
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -22,14 +24,14 @@ public class Game extends Product {
 
     public Game(){
         super();
-        genres = new HashSet<>();
+        genres = new ArrayList<>();
     }
 
-    public Set<Genre> getGenres() {
+    public List<Genre> getGenres() {
         return genres;
     }
 
-    public void setGenres(Set<Genre> genres) {
+    public void setGenres(List<Genre> genres) {
         this.genres = genres;
     }
 

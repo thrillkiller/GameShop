@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title>Games Shop</title>
+    </head>
+	<body bgcolor="#acac8f">
+	<center>
+	<p>Welcome to Games Shop!</p>
+	
+	<table>
+	<tr>
+	<th>No</th>
+	<th>Id</th>
+	<th>User name</th>
+	<th>State</th>
+	</tr>
+	<tr th:each="eorder,i : ${eorders}">
+	<td th:text="${i.count}">1</td>
+	<td><form action="#" th:action="@{/order/} + ${eorder.id}" method="get">
+	<input type="submit" th:value="${eorder.id}"/></form></td>
+	<td th:text="${eorder.user.getUserName()}">name</td>
+	<td th:text="${eorder.state}">state</td>
+	</tr>
+	</table>	
+
+	<div th:if="${selected}">
+		<p>Details:</p>
+		<p>User: <span th:text="${name}">Name</span></p>
+		<p>Adress: <span th:text="${adress}">adress</span></p>
+		<p>Order time: <span th:text="${time}">Name</span></p>
+		<p>Order state: <span th:text="${state}">Name</span></p>		
+		<table>
+		<tr>
+		<th>No</th>
+		<th>Name</th>
+		<th>Amount</th>
+		<th>Price</th>
+		</tr>
+		<tr th:each="product,i : ${products}">
+		<td th:text="${i.count}">1</td>
+		<td th:text="${product.name}">name</td>
+		<td th:text="${product.avaible}">1</td>
+		<td th:text="${product.getPrice()}">1</td>
+		</table>
+		<p>Worth: <span th:text="${worth}">1</span></p>
+		<div th:if="${supervisor} and ${nextState} != 'sent'">
+			<p><form action="#" th:action="@{/order/changeTo} + ${nextState}" method="get">
+			<input type="submit" th:value="Change to + ${nextState}"/></form></p>
+		<div th:if="${supervisor} == false and ${cancellable}">
+			<p><form action="#" th:action="@{/order/cancel} + ${id}" method="get">
+			<input type="submit" th:value="Cancel order"/></form></p>
+	</div>
+	<div th:if="${cancel}">
+		<p>Order was cancelled</p>
+	</div>
+	<div th:if="${error}">
+		<p>Error</p>
+		<p>That order doesn't exists</p>
+	</div>
+	</p>
+	</center>
+    </body>
+</html>

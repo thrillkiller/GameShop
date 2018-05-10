@@ -1,8 +1,8 @@
 package com.example.GameShop.Models;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class User {
@@ -30,14 +30,14 @@ public class User {
     private boolean supervisor;
 
     @Transient
-    private Set<Product> cart;
+    private List<Product> cart;
 
-    @OneToMany(cascade = {CascadeType.ALL})
-    private Set<EOrder> EOrders;
+    @OneToMany(mappedBy = "user",cascade = {CascadeType.ALL}, orphanRemoval = true)
+    private List<Eorder> Eorders;
 
     public User() {
-        cart = new HashSet<>();
-        EOrders = new HashSet<>();
+        cart = new ArrayList<>();
+        Eorders = new ArrayList<>();
         supervisor = false;
     }
 
@@ -100,10 +100,11 @@ public class User {
     public void addProductToCart(Product product) {
         if(cart.contains(product))
         {
-            cart.stream().forEach((Product p)-> {
-                if(p.equals(product))
+            for(Product p : cart)
+            {
+                if(p.getName().equals(product.getName()))
                     p.add(1);
-                });
+            }
         }
         else
         {
@@ -125,15 +126,19 @@ public class User {
         return cart.remove(product);
     }
 
-    public Set<Product> getCart() {return cart;}
+    public List<Product> getCart() {return cart;}
 
 
-    public Set<EOrder> getEOrders() {
-        return EOrders;
+    public List<Eorder> getEorders() {
+        return Eorders;
     }
 
-    public void setEOrders(Set<EOrder> EOrders) {
-        this.EOrders = EOrders;
+    public void setEorders(List<Eorder> eorders) {
+        this.Eorders = eorders;
+    }
+
+    public String getUserName(){
+        return name + " " + surname;
     }
 
 }
