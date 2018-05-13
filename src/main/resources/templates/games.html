@@ -5,6 +5,14 @@
 	<body bgcolor="#acac8f">
 	<center>
 	<p>Games list<p>
+	<p>
+	<!--<th:block th:each="genre : ${genres}">
+			<td><form action="#" th:action="@{/games/byGenre/} + ${genre.name}" method="get">
+			<input type="submit" th:value="${genre.name}"/></form></td>
+	</th:block> !-->
+	</p>
+	<p><form action="/games">
+	<input type="submit" value="No filter"/></form></p>
 	<table>
 	<tr>
 	<th>No</th>
@@ -31,8 +39,10 @@
 			<label th:text="${genre.name}"></label>
 		</th:block>
 		<p><input type="submit" value="Ok"/>
-		<input type ="reset" value="Clear fields"></form></p>
+		<input type ="reset" value="Clear fields"></form></p>	
 	</div>
+	<p><form action="/">
+	<input type="submit" value="Return to main page"/></form><p>
 	</center>
     </body>
 </html>
