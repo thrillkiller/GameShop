@@ -120,7 +120,19 @@ public class User {
     public int getCartSize(){return cart.size();}
 
     public boolean removeFromCart(Product product){
-        return cart.remove(product);
+        boolean exists = false;
+        for(Product p : cart)
+        {
+            if(p.getName().equals(product.getName())) {
+                exists = true;
+                int a = p.getAvailable();
+                if (a > 1)
+                    p.substract(1);
+                else
+                    cart.remove(p);
+            }
+        }
+        return exists;
     }
 
     public List<Product> getCart() {return cart;}
