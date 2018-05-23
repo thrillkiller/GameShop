@@ -4,15 +4,19 @@
     </head>
 	<body bgcolor="#acac8f">
 	<center>
-	<p>Games list<p>
+	<p>Search by genre</p>
 	<p>
-	<!--<th:block th:each="genre : ${genres}">
-			<td><form action="#" th:action="@{/games/byGenre/} + ${genre.name}" method="get">
-			<input type="submit" th:value="${genre.name}"/></form></td>
-	</th:block> !-->
+	<table>
+	<tr  th:each="genre : ${genres}">
+	<td><form action="#" th:action="@{/games/byGenre/} + ${genre.name}" method="get">
+	<input type="submit" th:value="${genre.name}"/></form></td>
+	</tr>
+	</table>
+
 	</p>
 	<p><form action="/games">
 	<input type="submit" value="No filter"/></form></p>
+	<p>Games list<p>
 	<table>
 	<tr>
 	<th>No</th>
