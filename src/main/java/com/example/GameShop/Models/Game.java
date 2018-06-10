@@ -5,14 +5,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Game extends Product {
 
-    @OneToMany(mappedBy = "game",cascade = {CascadeType.ALL}, orphanRemoval = true)
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "game_genre",joinColumns = @JoinColumn(name = "game_id"),
+    inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private List<Genre> genres;
 
     @Column

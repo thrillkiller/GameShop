@@ -1,6 +1,7 @@
 package com.example.GameShop.Controllers;
 
 import com.example.GameShop.Models.Eorder;
+import com.example.GameShop.Models.Product;
 import com.example.GameShop.Repositories.OrderRepo;
 import com.example.GameShop.Services.SettingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,11 @@ public class OrdersController {
     @GetMapping("/orders/new")
     public String newOrder(Model model){
         Eorder order = new Eorder(settingService.getLoggedUser());
+        for(Product p : order.getCart())
+        {
+            p.setEorder(order);
+        }
+        settingService.getLoggedUser().addOrder(order);
         orderRepo.save(order);
         settingService.getLoggedUser().clearCart();
         model.addAttribute("eorders",orderRepo.findByUser(settingService.getLoggedUser()));

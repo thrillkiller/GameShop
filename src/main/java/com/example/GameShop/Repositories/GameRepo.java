@@ -13,6 +13,8 @@ public interface GameRepo extends CrudRepository<Game,Long> {
     @Query("Select case when count(*) > 0 then true else false end from Game where name = :name")
     boolean doesExist(@Param("name") String name);
 
-    @Query("Select g from Game g Inner join g.genres gs where gs.name =:name")
+    @Query("Select g from Game g left outer join g.genres gs where gs.name = :name")
     Iterable<Game> selectByGenreName(@Param("name") String name);
+
+
 }

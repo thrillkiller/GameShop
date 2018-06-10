@@ -18,7 +18,7 @@
 	</table>
 	<div th:if="${supervisor} == true">
 		<p th:if="${error}">Error has occured/p>
-		<p>Add new game</p>
+		<p>Add new games</p>
 		<p><form action="#" th:action="@{/products}" th:object="${product}" method="post">	
 		<p>Name : <input type="text" th:field="*{name}" value="name"></p>
 		<p>Description : <input type="text" th:field="*{description}" value="description"></p>

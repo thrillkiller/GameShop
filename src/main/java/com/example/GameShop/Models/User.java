@@ -33,11 +33,11 @@ public class User {
     private List<Product> cart;
 
     @OneToMany(mappedBy = "user",cascade = {CascadeType.ALL}, orphanRemoval = true)
-    private List<Eorder> Eorders;
+    private List<Eorder> eorders;
 
     public User() {
         cart = new ArrayList<>();
-        Eorders = new ArrayList<>();
+        eorders = new ArrayList<>();
         supervisor = false;
     }
 
@@ -139,15 +139,20 @@ public class User {
 
 
     public List<Eorder> getEorders() {
-        return Eorders;
+        return eorders;
     }
 
     public void setEorders(List<Eorder> eorders) {
-        this.Eorders = eorders;
+        this.eorders = eorders;
     }
 
     public String getUserName(){
         return name + " " + surname;
+    }
+
+    public void addOrder(Eorder eorder){
+        this.eorders.add(eorder);
+        eorder.setUser(this);
     }
 
 }

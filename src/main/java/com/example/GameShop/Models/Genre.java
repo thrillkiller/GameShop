@@ -1,6 +1,8 @@
 package com.example.GameShop.Models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Genre {
@@ -12,16 +14,16 @@ public class Genre {
     @Column
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "game_id")
-    private Game game;
+    @ManyToMany(mappedBy = "genres")
+    private List<Game> gamesList;
 
     public Genre(String name)
     {
+        gamesList = new ArrayList<>();
         this.name = name;
     }
 
-    public Genre() {};
+    public Genre() {gamesList = new ArrayList<>();}
 
     public long getId() {
         return id;
@@ -39,11 +41,18 @@ public class Genre {
         this.name = name;
     }
 
-    public Game getGame() {
-        return game;
+    public List<Game> getGames() {
+        return gamesList;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    public void setGames(List<Game> gamesList) {
+        this.gamesList = gamesList;
     }
+
+    public boolean addGame(Game g)
+    {
+        return gamesList.add(g);
+    }
+
+
 }

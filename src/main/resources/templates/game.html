@@ -13,18 +13,18 @@
 		<p>Release date : <span th:text="${Releasedate}">onStock</span></p>
 		<p>Genres : <span th:text="${genres}">onStock</span></p>
 		<div th:if="${onStock} == true and ${logged} == true and ${supervisor} == false">
-			<td><form action="#" th:action="@{/game/add/} + ${id}" method="get">
+			<td><form action="#" th:action="@{/games/add/} + ${id}" method="get">
 			<input type="submit" value="Add to cart"/></form></td>		
 		</div>
 		<div th:if=" ${supervisor} == true">
-			<td><form action="#" th:action="@{/game/restock/} + ${id}" method="get">
+			<td><form action="#" th:action="@{/games/restock/} + ${id}" method="get">
 			<input type="submit" value="Restock"/></form></td>		
 		</div>
 		</p>
 	</div>
 	<div th:if=" ${error}  == true ">
 	<p>Error</p>
-	</p>That game doesn't exist</p>
+	</p>That games doesn't exist</p>
 	</div>
 	<p><form action="/">
 	<input type="submit" value="Return to main page"/></form><p>

@@ -19,7 +19,7 @@
 		</tr>
 		</table>
 		<p th:if="${error}">That genre already exists</p>
-		<p>Add new game</p>
+		<p>Add new games</p>
 		<p><form action="#" th:action="@{/genres}" th:object="${genre}" method="post">	
 		<p>Name : <input type="text" th:field="*{name}" value="name"></p>
 		<p><input type="submit" value="Ok"/>
